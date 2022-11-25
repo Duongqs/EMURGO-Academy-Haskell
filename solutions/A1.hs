@@ -1,6 +1,7 @@
 module A1 where
 
 import Data.Char (toUpper)
+import Text.Read (Lexeme(String))
 
 -- *** Assignment 1-1 *** --
 
@@ -13,7 +14,7 @@ _DISPLAY_LOGO_ :: Bool
 _DISPLAY_LOGO_ = True
 
 -- Q#03
-convertRowIndex :: Int -> Int
+convertRowIndex :: Char -> Int
 convertRowIndex x = fromEnum (toUpper x ) - 65
 
 -- Q#04
@@ -21,8 +22,8 @@ _INVALID_MOVE_ :: (Int , Int)
 _INVALID_MOVE_  = (-1,-1) 
 
 -- Q#05
-
-_SEP_ = "_|_"
+_SEP_  :: String
+_SEP_ = "_|_" 
 
 -- *** Assignment 1-2 *** --
 
