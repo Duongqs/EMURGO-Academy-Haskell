@@ -55,9 +55,9 @@ ifEvenInc = (\x -> ifEven inc x)
 
 genIfXEven f x = ifEven f x
 
-myExampleUrlBuilder = genApiRequestBuilder exampleUrlBuilder "1337hAsk3ll"
+--myExampleUrlBuilder = genApiRequestBuilder exampleUrlBuilder "1337hAsk3ll"
 
-genApiRequestBuilder hostBuilder apiKey = (\resource id -> hostBuilder apiKey resource id)
-exampleUrlBuilder = genHostRequestBuilder "http://example.com"
-genHostRequestBuilder host = (\apiKey resource id -> getRequestUrl host apikey resource id)
+--genApiRequestBuilder hostBuilder apiKey = (\resource id -> hostBuilder apiKey resource id)
+--exampleUrlBuilder = genHostRequestBuilder "http://example.com"
+--genHostRequestBuilder host = (\apiKey resource id -> getRequestUrl host apikey resource id)
 

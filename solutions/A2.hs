@@ -30,25 +30,30 @@ readDigit x = if isDigit(x) then read([x])
 
 -- Q#04
 
-_EMPTY_ROW_ = undefined
+_EMPTY_ROW_ = replicate _SIZE_ E
 
 
-_EMPTY_BOARD_ = undefined
+_EMPTY_BOARD_ = replicate _SIZE_ _EMPTY_ROW_
 
 -- Q#05
+isTied :: Board -> Bool
+isTied x = E `notElem` concat(x)
 
-isTied = undefined
 
-
-_TIED_BOARD_ = undefined
+_TIED_BOARD_ :: Board
+_TIED_BOARD_ = [
+    [X, O, O]
+  , [O, X, X]
+  , [O, X, O]
+  ]
 
 -- Q#06
-
-indexRowStrings = undefined
+indexRowStrings :: [String] -> [(Char,String)]
+indexRowStrings x = zip ['A'..] x
 
 -- Q#07
-
-formatLine = undefined
+formatLine :: [String] -> String
+formatLine x = _SEP_++intercalate (_SEP_) (x) ++_SEP_
 
 -- *** Assignment 2-2 *** --
 
