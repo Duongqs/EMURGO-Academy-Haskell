@@ -6,6 +6,7 @@ module A2 where
 
 import A1
 import Data.List (intercalate)
+import Data.Bits (Bits(xor))
 
 -- *** Assignment 2-1 *** --
 
@@ -74,5 +75,15 @@ stringToMove [x,y] = (convertRowIndex x, readDigit y)
 stringToMove _ = _INVALID_MOVE_
 
 -- Q#10
-replaceSquareInRow :: Player -> Int -> Int -> Row
-replaceSquareInRow = undefined
+replaceSquareInRow :: Player -> Int -> Row -> Row
+replaceSquareInRow playerX colIndex row 
+      | colIndex >= length row = row
+      | colIndex < 0 = row
+      | otherwise = x ++ playerX:ys
+            where (x,y:ys)= splitAt colIndex row 
+
+rsX :: Int -> Row -> Row
+rsX colIndex row = replaceSquareInRow X colIndex row 
+
+rsO :: Int -> Row -> Row
+rsO colIndex row = replaceSquareInRow O colIndex row 
