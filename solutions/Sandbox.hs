@@ -1,6 +1,10 @@
+{-# LANGUAGE StrictData #-}
+{-# LANGUAGE InstanceSigs #-}
 module Sandbox where
 import Text.Read (Lexeme(String, Char))
 import Foreign (toBool)
+import GHC.Enum (Enum)
+import Data.List
 ---
 half :: Int -> Double
 half n = (fromIntegral n)/2.0
@@ -61,3 +65,55 @@ genIfXEven f x = ifEven f x
 --exampleUrlBuilder = genHostRequestBuilder "http://example.com"
 --genHostRequestBuilder host = (\apiKey resource id -> getRequestUrl host apikey resource id)
 
+----------------
+sum' :: Num a => [a] -> a --[Int] -> Int --
+sum' (x:xs) = x + sum' xs
+sum' []     = 0
+
+
+concat' :: [[a]] -> [a]
+concat' [] = []
+concat' (x:xs) = x ++ concat' xs
+
+length' :: [a] -> Int
+length' [] = 0
+length' (_:xs) = 1 + length' xs
+
+elem' :: Eq a => a -> [a] -> Bool
+elem' _ [] = False
+elem' p (x:xs) = (p == x) || elem' p xs  
+
+zip' :: [a] -> [b] -> [(a,b)]
+--zip' (y:ys) (x:xs) = [(y,x)] ++ zip' ys xs
+zip' (y:ys) (x:xs) = (y,x) : zip' ys xs
+zip' _ _           = []
+
+last' :: [a] -> a
+last' [] = error ("There is no last item of empty list")
+last' [x] = x
+last' (_:xs) = last' xs
+
+init' :: [a] -> [a]
+init' [] = error ("There is no first item of empty list")
+init' [x] =[]
+init' (x:_) = [x]
+
+data Rhtype = Pos | Neg
+data ABOtype = A | B | AB | O
+
+data BloodType = BloodType ABOtype Rhtype
+
+data SixSidedDie = S1 | S2 | S3 | S4 | S5 | S6 deriving (Show,Eq,Ord)
+--type Name = (String, String)--
+--instance Ord Name where
+    --compare (f1,l1) (f2,l2) = compare (l1,f1) (l2,f2)
+
+data Name = Name (String, String) deriving (Show, Eq,Ord)
+--instance Ord Name where
+    -- compare :: Name -> Name -> Ordering
+    -- compare (Name (f1,l1)) (Name (f2,l2)) = compare (l1,f1) (l2,f2)
+
+names :: [Name]
+names = [Name ("Emil","Cioran")
+          , Name ("Eugene","Thacker")
+          , Name ("Friedrich","Nietzsche")]

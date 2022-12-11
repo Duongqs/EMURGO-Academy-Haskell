@@ -1,4 +1,6 @@
 {-# OPTIONS_GHC -Wno-unrecognised-pragmas #-}
+{-# OPTIONS_GHC -Wno-incomplete-patterns #-}
+{-# OPTIONS_GHC -Wno-typed-holes #-}
 
 module A2 where
 
@@ -15,7 +17,7 @@ promptPlayer x = concat["Player ",show(x),"'s turn: enter a row and column posit
 
 -- Q#02
 
-_RANGE_ = [1 .. _SIZE_]
+_RANGE_ = [0 .. (_SIZE_-1)]
 
 -- Q#03
 
@@ -58,13 +60,19 @@ formatLine x = _SEP_++intercalate (_SEP_) (x) ++_SEP_
 -- *** Assignment 2-2 *** --
 
 -- Q#08
+isMoveInBounds :: Move -> Bool
 
-isMoveInBounds = undefined
+isMoveInBounds (x,y) 
+  | (x `elem` _RANGE_) && (y `elem` _RANGE_) = True
+  | otherwise = False
+  -- where (x,y) = m
 
 -- Q#09
-
-stringToMove = undefined
+stringToMove :: String -> Move
+stringToMove [] = _INVALID_MOVE_
+stringToMove [x,y] = (convertRowIndex x, readDigit y)
+stringToMove _ = _INVALID_MOVE_
 
 -- Q#10
-
+replaceSquareInRow :: Player -> Int -> Int -> Row
 replaceSquareInRow = undefined
