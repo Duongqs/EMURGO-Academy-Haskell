@@ -29,10 +29,16 @@ formatRows (x:xs) = formatLine(showSquares x) : formatRows xs
 -- ++ "," ++ formatRows xs
 
 -- Q#04
+-- isColEmpty :: Row -> Int -> Bool
+-- isColEmpty [] _ = False
+-- isColEmpty (x:xs) 0 = x == E
+-- isColEmpty (_:xs) i = i>0 && isColEmpty xs (i-1)
+
 isColEmpty :: Row -> Int -> Bool
 isColEmpty [] _ = False
 isColEmpty (x:xs) 0 = x == E
-isColEmpty (_:xs) i = i>0 && isColEmpty xs (i-1)
+isColEmpty (_:xs) i | i>0           = isColEmpty xs (i-1)
+                    | otherwise     = False
 
 -- Q#05
 dropFirstCol :: Board -> Board
