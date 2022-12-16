@@ -93,10 +93,30 @@ last' [] = error ("There is no last item of empty list")
 last' [x] = x
 last' (_:xs) = last' xs
 
+head' = undefined
+-- Description:	returns the first item of a list
+
+drop' :: Int -> [a] -> [a]
+drop' _ [] = []
+drop' 0 x = x
+drop' i (x:xs) = if i>0  then drop' (i-1) xs else x:xs
+-- Description:	returns the first item of a list
+
+dropWhile' :: (a -> Bool) -> [a] -> [a]
+dropWhile' _ [] = []
+dropWhile' f (x:xs) = if f x then  dropWhile f xs else x:xs 
+
+
+
 init' :: [a] -> [a]
-init' [] = error ("There is no first item of empty list")
+init' [] = error ("There is initiative items of empty list")
 init' [x] =[]
 init' (x:_) = [x]
+
+tail':: [a] -> [a]
+tail' [] = error ("There is no tail item of empty list")
+tail' [x] = []
+tail' (_:xs) = xs
 
 data Rhtype = Pos | Neg
 data ABOtype = A | B | AB | O

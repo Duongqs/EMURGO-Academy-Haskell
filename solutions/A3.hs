@@ -32,12 +32,12 @@ formatRows (x:xs) = formatLine(showSquares x) : formatRows xs
 isColEmpty :: Row -> Int -> Bool
 isColEmpty [] _ = False
 isColEmpty (x:xs) 0 = x == E
-isColEmpty (x:xs) i = i>0 && isColEmpty xs (i-1)
+isColEmpty (_:xs) i = i>0 && isColEmpty xs (i-1)
 
 -- Q#05
 dropFirstCol :: Board -> Board
 dropFirstCol [] = []
-dropFirstCol (x:xs) = drop 1 x : dropFirstCol xs
+dropFirstCol (x:xs) = tail x : dropFirstCol xs
 
 
 
