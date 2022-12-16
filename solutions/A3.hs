@@ -69,6 +69,7 @@ getAllLines [] = []
 getAllLines x = x ++ transpose x ++ [getDiag1 x] ++ [getDiag2 x]
 
 
+
 -- *** Assignment 3-2 ***
 
 -- Q#07
