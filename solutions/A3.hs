@@ -30,27 +30,37 @@ formatRows (x:xs) = formatLine(showSquares x) : formatRows xs
 
 -- Q#04
 isColEmpty :: Row -> Int -> Bool
-isColEmpty [E,E,E] _ = True 
-isColEmpty _ -1 = False 
-isColEmpty (x:xs) i = (x == E)
+isColEmpty [] _ = False
+isColEmpty (x:xs) 0 = x == E
+isColEmpty (x:xs) i = i>0 && isColEmpty xs (i-1)
 
 -- Q#05
+dropFirstCol :: Board -> Board
+dropFirstCol [] = []
+dropFirstCol (x:xs) = drop 1 x : dropFirstCol xs
 
-dropFirstCol = undefined
 
 
-dropLastCol = undefined
 
+dropLastCol :: Board -> Board
+dropLastCol [] = []
+dropLastCol (x:xs) = init x : dropLastCol xs
 -- Q#06
 
-getDiag1 = undefined
+getDiag1 :: Board  -> Line
+getDiag1 [] = []
+getDiag1 (x:xs) = head x : getDiag1 (dropFirstCol xs)
 
 
-getDiag2 = undefined
+
+getDiag2 :: Board  -> Line
+getDiag2 [] = []
+getDiag2 (x:xs) =  last x : getDiag2 (dropLastCol xs)
 
 
-getAllLines = undefined
-
+getAllLines :: Board -> [Line]
+getAllLines [] = []
+getAllLines x = x ++ transpose x ++ [getDiag1 x] ++ [getDiag2 x]
 -- *** Assignment 3-2 ***
 
 -- Q#07
