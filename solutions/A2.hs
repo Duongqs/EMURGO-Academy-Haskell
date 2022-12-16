@@ -87,3 +87,7 @@ rsX colIndex row = replaceSquareInRow X colIndex row
 
 rsO :: Int -> Row -> Row
 rsO colIndex row = replaceSquareInRow O colIndex row 
+-- ys'
+      -- | null ys   = ??
+      -- | j < 0     = ??
+      -- | otherwise = ??

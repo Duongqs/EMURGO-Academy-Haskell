@@ -4,28 +4,35 @@ import A1
 import A2
 
 import Data.List (transpose)
+import Control.Monad (forM)
 
 -- *** Assignment 3-1 ***
 
 -- Q#01
+showInts :: [Int] -> [String]
+showInts [] = []
+showInts (x:xs) = show x : showInts xs
 
-showInts = undefined
 
-
-_HEADER_ = undefined
+_HEADER_ =  " " ++ formatLine (showInts _RANGE_)
 
 -- Q#02
-
-showSquares = undefined
+showSquares :: [Square] -> [String]
+showSquares []      = []
+showSquares (x:xs)  = show x : showSquares xs
 
 
 -- Q#03
-
-formatRows = undefined
+formatRows :: [Row] -> [String]
+formatRows [] = []
+formatRows (x:xs) = formatLine(showSquares x) : formatRows xs
+-- ++ "," ++ formatRows xs
 
 -- Q#04
-
-isColEmpty = undefined
+isColEmpty :: Row -> Int -> Bool
+isColEmpty [E,E,E] _ = True 
+isColEmpty _ -1 = False 
+isColEmpty (x:xs) i = (x == E)
 
 -- Q#05
 
