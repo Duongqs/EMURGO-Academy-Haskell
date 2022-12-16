@@ -42,15 +42,15 @@ isColEmpty (_:xs) i | i>0           = isColEmpty xs (i-1)
 
 -- Q#05
 dropFirstCol :: Board -> Board
-dropFirstCol [] = []
-dropFirstCol (x:xs) = tail x : dropFirstCol xs
-
-
+dropFirstCol []      = []
+dropFirstCol ([]:xs) = [] : dropFirstCol xs
+dropFirstCol (x:xs)  = tail x : dropFirstCol xs
 
 
 dropLastCol :: Board -> Board
-dropLastCol [] = []
-dropLastCol (x:xs) = init x : dropLastCol xs
+dropLastCol []      = []
+dropLastCol ([]:xs) = [] : dropLastCol xs
+dropLastCol (x:xs)  = init x : dropLastCol xs
 -- Q#06
 
 getDiag1 :: Board  -> Line
@@ -67,6 +67,8 @@ getDiag2 (x:xs) =  last x : getDiag2 (dropLastCol xs)
 getAllLines :: Board -> [Line]
 getAllLines [] = []
 getAllLines x = x ++ transpose x ++ [getDiag1 x] ++ [getDiag2 x]
+
+
 -- *** Assignment 3-2 ***
 
 -- Q#07
