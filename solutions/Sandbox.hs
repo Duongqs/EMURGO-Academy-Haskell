@@ -137,3 +137,19 @@ names :: [Name]
 names = [Name ("Emil","Cioran")
           , Name ("Eugene","Thacker")
           , Name ("Friedrich","Nietzsche")]
+
+-- alwaysBlue ::[Color] -> Bool
+-- alwaysBlue [] = False
+-- alwaysBlue (x:xs) = x == Blue && alwaysBlue xs
+
+isPrime :: Int -> Bool
+
+isPrime n
+  | n<=1 = False
+  |n <=3 = True
+  | otherwise = go 2
+  where 
+    go i 
+     | i>= n = True
+     | mod n i ==0 = False
+     | otherwise = go (i+1)

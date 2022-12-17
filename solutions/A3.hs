@@ -5,6 +5,7 @@ import A2
 
 import Data.List (transpose)
 import Control.Monad (forM)
+import System.Posix.Internals (puts)
 
 -- *** Assignment 3-1 ***
 
@@ -74,8 +75,14 @@ getAllLines x = x ++ transpose x ++ [getDiag1 x] ++ [getDiag2 x]
 
 -- Q#07
 
-putSquare = undefined
-
+putSquare :: Player -> Board -> Move -> Board 
+putSquare _ [] (_,_) = []
+putSquare p (bx:bxs) (row,col) = go 0 (bx:bxs)
+    where 
+        go _ [] = []
+        go i (bx:bxs)
+            | i == row = replaceSquareInRow p col bx : bxs
+            | otherwise =  bx : go (i+1) bxs
 -- Q#08
 
 prependRowIndices = undefined
