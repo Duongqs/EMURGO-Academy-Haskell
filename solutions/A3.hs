@@ -6,6 +6,7 @@ import A2
 import Data.List (transpose)
 import Control.Monad (forM)
 import System.Posix.Internals (puts)
+import Text.ParserCombinators.ReadP (char)
 
 -- *** Assignment 3-1 ***
 
@@ -79,13 +80,20 @@ putSquare :: Player -> Board -> Move -> Board
 putSquare _ [] (_,_) = []
 putSquare p (bx:bxs) (row,col) = go 0 (bx:bxs)
     where 
+        go :: Int -> Board -> Board
         go _ [] = []
         go i (bx:bxs)
             | i == row = replaceSquareInRow p col bx : bxs
             | otherwise =  bx : go (i+1) bxs
 -- Q#08
 
-prependRowIndices = undefined
+prependRowIndices :: [String] -> [String]
+prependRowIndices [] =[]
+prependRowIndices x = go (zip ['A'..] x )
+    where 
+        go :: [(Char,String)] ->[String]
+        go []           = []
+        go ((a1,b1):ax) = ([a1] ++ b1) : go ax
 
 -- Q#09
 

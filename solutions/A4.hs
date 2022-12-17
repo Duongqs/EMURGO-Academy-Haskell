@@ -58,7 +58,7 @@ playMove = undefined
 
 -- Q#10
 
-prependRowIndices = undefined
+-- prependRowIndices = undefined
 
 -- Q#11
 
