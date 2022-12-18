@@ -4,7 +4,7 @@ import A1
 import A2
 
 import Data.List (transpose)
-import Control.Monad (forM)
+import Control.Monad (forM, join)
 import System.Posix.Internals (puts)
 import Text.ParserCombinators.ReadP (char)
 
@@ -97,8 +97,23 @@ prependRowIndices x = go (zip ['A'..] x )
 
 -- Q#09
 
-isWinningLine = undefined
+isWinningLine :: Player -> Line -> Bool
+isWinningLine _ [] = False
+isWinningLine p l = go True l
+    where 
+        go :: Bool -> Line -> Bool
+        go acc []       =  acc
+        go acc (x:xs) =  p==x && go acc xs
 
 -- Q#10
 
-isValidMove = undefined
+isValidMove :: Board -> Move -> Bool
+isValidMove [] _ = False
+isValidMove x (i,j)  = isMoveInBounds (i,j) && go True x i
+        where 
+            go :: Bool -> Board -> Int -> Bool
+            go _ [] _            = False 
+            go acc (x:_) 0       = isColEmpty x j && acc
+            go acc (_x:xs) y     =   go acc xs (y-1)
+
+    -- Otherwise False

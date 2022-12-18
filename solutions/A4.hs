@@ -43,7 +43,7 @@ isWinningLine_ = undefined
 
 -- Q#07
 
-isWinningLine = undefined
+-- isWinningLine = undefined
 
 -- Q#08
 
