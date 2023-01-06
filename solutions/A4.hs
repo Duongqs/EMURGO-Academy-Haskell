@@ -16,7 +16,7 @@ import A3 hiding (
 
 -- Q#01
 
-_HEADER_ = undefined
+_HEADER_ =  " " ++ formatLine (map show _RANGE_)
 
 -- Q#02
 
