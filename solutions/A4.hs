@@ -11,7 +11,7 @@ import A3 hiding (
   isWinningLine,
   prependRowIndices
   )
-
+import Data.List (intercalate)
 -- *** Assignment 4-1 *** --
 
 -- Q#01
@@ -20,23 +20,26 @@ _HEADER_ =  " " ++ formatLine (map show _RANGE_)
 
 -- Q#02
 
-showSquares = undefined
+-- showSquares :: Square -> [String]
+showSquares xs = map show xs
+
 
 -- Q#03
 
--- dropFirstCol = undefined
+dropFirstCol board_x= map tail board_x 
 
 -- Q#04
 
--- dropLastCol = undefined
+dropLastCol board_x= map init board_x
+-- 
 
 --Q#05
 
-formatRows = undefined
-
+formatRows xs = map (\x -> "_|_" ++ intercalate ("_|_") (showSquares x) ++ "_|_") xs
 -- Q#06
-
-isWinningLine_ = undefined
+isWinningLine_ :: Player -> Line -> Bool
+isWinningLine_ _ [] = False
+isWinningLine_ p line = null (filter (\x -> p/=x) line)
 
 
 -- *** Assignment 4-2 *** --
