@@ -12,8 +12,9 @@ import Control.Monad (when)
 
 -- Q#01
 
-printBoard = undefined
+printBoard :: Board -> IO ()
 
+printBoard x = print (formatBoard x)
 -- Q#02
 _LOGO_PATH_ :: FilePath
 _LOGO_PATH_ = "./assets/logo.txt"
