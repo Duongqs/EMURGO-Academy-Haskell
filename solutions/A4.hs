@@ -68,19 +68,21 @@ _O_WIN_ = [ [O, X, O]
 getGameState :: Board -> GameState
 -- getGameState []                              = []
 getGameState board
-  | board == _EMPTY_BOARD_ = In_progress
   | hasWon X board = X_won
-  | hasWon O board = X_won
-  | otherwise = Tie
+  | hasWon O board = O_won
+  | isTied board = Tie
+  | otherwise = In_progress
 
 
 
 
-playMove = undefined
-
+playMove :: Player -> Board -> Move -> (GameState, Board)
+playMove p board move = (getGameState new_board, new_board) 
+  where new_board = putSquare p board move
 -- Q#10
 
--- prependRowIndices = undefined
+prependRowIndices :: [String] -> [String]
+prependRowIndices a = zipWith (++) a [['A'..]]
 
 -- Q#11
 
