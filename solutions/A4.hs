@@ -26,7 +26,7 @@ showSquares xs = map show xs
 
 -- Q#03
 
-dropFirstCol board_x= map tail board_x 
+dropFirstCol board_x= map tail board_x
 
 -- Q#04
 
@@ -46,15 +46,34 @@ isWinningLine_ p line = null (filter (\x -> p/=x) line)
 
 -- Q#07
 
--- isWinningLine = undefined
-
+isWinningLine :: Player -> Line -> Bool
+isWinningLine p line = foldr (\lineb acc  -> acc && (p==lineb)) True line
 -- Q#08
 
-hasWon = undefined
+hasWon :: Player -> Board -> Bool
+hasWon p board = foldr (\linex acc -> acc || isWinningLine p linex) False (getAllLines board)
+
+_X_WIN_ = [ [X, O, O]
+          , [O, X, O]
+          , [O, O, X]
+          ]
+
+_O_WIN_ = [ [O, X, O]
+          , [X, X, O]
+          , [X, O, O]
+          ]
 
 -- Q#09
 
-getGameState = undefined
+getGameState :: Board -> GameState
+-- getGameState []                              = []
+getGameState board
+  | board == _EMPTY_BOARD_ = In_progress
+  | hasWon X board = X_won
+  | hasWon O board = X_won
+  | otherwise = Tie
+
+
 
 
 playMove = undefined

@@ -13,8 +13,9 @@ import Control.Monad (when)
 -- Q#01
 
 printBoard :: Board -> IO ()
+printBoard b = return formatBoard b
 
-printBoard x = print (formatBoard x)
+--printBoard x = print (formatBoard x)
 -- Q#02
 _LOGO_PATH_ :: FilePath
 _LOGO_PATH_ = "./assets/logo.txt"
