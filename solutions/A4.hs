@@ -82,7 +82,8 @@ playMove p board move = (getGameState new_board, new_board)
 -- Q#10
 
 prependRowIndices :: [String] -> [String]
-prependRowIndices a = zipWith (++) a [['A'..]]
+prependRowIndices a = zipWith (++) azlist a
+  where azlist = map (:[]) ['A'..'Z']
 
 -- Q#11
 
