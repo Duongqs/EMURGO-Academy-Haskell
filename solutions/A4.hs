@@ -87,4 +87,5 @@ prependRowIndices a = zipWith (++) azlist a
 
 -- Q#11
 
-formatBoard = undefined
+-- formatBoard :: Board -> String
+-- formatBoard board = prependRowIndices. _HEADER_++formatRows board 
