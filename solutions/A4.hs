@@ -87,5 +87,5 @@ prependRowIndices a = zipWith (++) azlist a
 
 -- Q#11
 
--- formatBoard :: Board -> String
--- formatBoard board = prependRowIndices. _HEADER_++formatRows board 
+formatBoard :: Board -> String
+formatBoard board = intercalate "\n" (_HEADER_ : prependRowIndices (formatRows board ))
