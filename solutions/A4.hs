@@ -34,7 +34,7 @@ dropLastCol board_x= map init board_x
 -- 
 
 --Q#05
-
+formatRows :: Board -> [String]
 formatRows xs = map (\x -> "_|_" ++ intercalate ("_|_") (showSquares x) ++ "_|_") xs
 -- Q#06
 isWinningLine_ :: Player -> Line -> Bool
@@ -88,4 +88,5 @@ prependRowIndices a = zipWith (++) azlist a
 -- Q#11
 
 formatBoard :: Board -> String
-formatBoard board = intercalate "\n" (_HEADER_ : prependRowIndices (formatRows board ))
+formatBoard board = intercalate "\n" $ _HEADER_ : prependRowIndices (formatRows board )
+  -- NOT okie intercalate "\n" $ _HEADER_ : prependRowIndices $ formatRows $ board 
