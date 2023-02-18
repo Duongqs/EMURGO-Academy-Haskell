@@ -1,10 +1,10 @@
 module Main where
-
 import A1
 import A2
 import A3
 import A4
 import A5
-import State
+-- import State
 main :: IO ()
-main = putStrLn "Welcome to Part I of EMURGO Academy's Haskell course, Django!"
+main = do
+   firstPlayer _RANDOM_BOOL_ >>= play _EMPTY_BOARD_
