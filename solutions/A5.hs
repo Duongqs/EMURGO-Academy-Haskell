@@ -56,16 +56,14 @@ getMove board = do
 
 play :: Board -> Player -> IO ()
 play board player = do
-    if _DISPLAY_LOGO_ 
-        then printLogo
-    else do
-        printBoard board
-        putStrLn.promptPlayer $ player
-        move <- getMove board
-        let (gamestate, newboard) = playMove player board move 
-        if gamestate == In_progress 
-            then play newboard (switchPlayer  player)
-            else do printBoard newboard >>  putStrLn(showGameState gamestate)
+    when _DISPLAY_LOGO_  printLogo
+    printBoard board
+    putStrLn.promptPlayer $ player
+    move <- getMove board
+    let (gamestate, newboard) = playMove player board move 
+    if gamestate == In_progress 
+        then play newboard (switchPlayer  player)
+        else do printBoard newboard >>  putStrLn(showGameState gamestate)
 -- *** Assignment 5-2 *** --
 
 -- Q#07
