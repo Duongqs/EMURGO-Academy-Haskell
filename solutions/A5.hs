@@ -13,7 +13,7 @@ import Control.Monad (when)
 -- Q#01
 
 printBoard :: Board -> IO ()
-printBoard b = return formatBoard b
+printBoard b = putStrLn $ formatBoard b
 
 --printBoard x = print (formatBoard x)
 -- Q#02
@@ -21,14 +21,19 @@ _LOGO_PATH_ :: FilePath
 _LOGO_PATH_ = "./assets/logo.txt"
 
 
-printLogo = undefined
+printLogo :: IO ()
+printLogo = do
+    readFile _LOGO_PATH_ >>= putStrLn
+
 
 -- Q#03
 _RANDOM_BOOL_ :: IO Bool
 _RANDOM_BOOL_ = uniformM globalStdGen
 
 
-firstPlayer = undefined
+firstPlayer :: IO Bool -> IO Player
+firstPlayer rd =  getFirstPlayer <$> rd
+
 
 -- Q#04
 
