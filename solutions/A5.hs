@@ -23,8 +23,7 @@ _LOGO_PATH_ = "./assets/logo.txt"
 
 
 printLogo :: IO ()
-printLogo = do
-    readFile _LOGO_PATH_ >>= putStrLn
+printLogo = readFile _LOGO_PATH_  >>= putStrLn 
 
 
 -- Q#03
@@ -40,12 +39,22 @@ firstPlayer rd =  getFirstPlayer <$> rd
 
 -- getMove = undefined
 getMove :: Board  -> IO Move
-getMove board = do
-    move <- getLine
-    let realmove = stringToMove move
-    if isValidMove board realmove
-        then return realmove
-    else putStrLn "it is not valid move, please input again" >> getMove board
+getMove board =  putStrLn " please enter valid move" >> getLine >>= worker board
+worker b input = if isValidMove b move then return move
+                 else putStrLn "it is not valid move, please input again" 
+                        >> getMove b
+                 where move = stringToMove input
+
+
+
+    
+    -- do
+    -- move <- getLine
+    -- let realmove = stringToMove move
+    -- if isValidMove board realmove
+    --     then return realmove
+    -- else putStrLn "it is not valid move, please input again" 
+    -- >> getMove board
 
 
 -- getMove' board = do
@@ -54,8 +63,46 @@ getMove board = do
  
 -- Q#05
 
-play :: Board -> Player -> IO ()
-play board player = do
+-- play :: Board -> Player -> IO ()
+-- play board player = do
+--     when _DISPLAY_LOGO_  printLogo
+--     printBoard board
+--     putStrLn.promptPlayer $ player
+--     move <- getMove board
+--     let (gamestate, newboard) = playMove player board move 
+--     if gamestate == In_progress 
+--         then play newboard (switchPlayer  player)
+--         else do printBoard newboard >>  putStrLn(showGameState gamestate)
+-- *** Assignment 5-2 *** --
+
+-- Q#07
+
+printLogoDo :: IO ()
+printLogoDo = do
+    logo <- readFile _LOGO_PATH_
+    putStrLn logo  
+-- Q#08
+
+firstPlayerDo :: IO Bool -> IO Player
+firstPlayerDo rd =  do
+    ramdon <- rd
+    return (getFirstPlayer ramdon)
+
+-- Q#09
+
+getMoveDo :: Board  -> IO Move
+getMoveDo board = do
+    move <- getLine
+    let realmove = stringToMove move
+    if isValidMove board realmove
+        then return realmove
+    else putStrLn "it is not valid move, please input again"
+         >> getMoveDo board
+
+-- Q#10
+
+playDo :: Board -> Player -> IO ()
+playDo board player = do
     when _DISPLAY_LOGO_  printLogo
     printBoard board
     putStrLn.promptPlayer $ player
@@ -65,19 +112,3 @@ play board player = do
         then play newboard (switchPlayer  player)
         else do printBoard newboard >>  putStrLn(showGameState gamestate)
 -- *** Assignment 5-2 *** --
-
--- Q#07
-
-printLogoDo = undefined
-
--- Q#08
-
-firstPlayerDo = undefined
-
--- Q#09
-
-getMoveDo = undefined
-
--- Q#10
-
-playDo = undefined
