@@ -23,7 +23,7 @@ _LOGO_PATH_ = "./assets/logo.txt"
 
 
 printLogo :: IO ()
-printLogo = readFile _LOGO_PATH_  >>= putStrLn 
+printLogo = readFile _LOGO_PATH_  >>= putStrLn
 
 
 -- Q#03
@@ -39,15 +39,17 @@ firstPlayer rd =  getFirstPlayer <$> rd
 
 -- getMove = undefined
 getMove :: Board  -> IO Move
-getMove board =  putStrLn " please enter valid move" >> getLine >>= worker board
-worker b input = if isValidMove b move then return move
-                 else putStrLn "it is not valid move, please input again" 
-                        >> getMove b
-                 where move = stringToMove input
+getMove board   =
+    putStrLn " please enter valid move" >>
+    getLine >>= worker
+    where
+        worker :: String -> IO Move
+        worker move = if isValidMove board.stringToMove $ move then return.stringToMove $ move
+                        else putStrLn "it is not valid move, please input again"  >> getMove board
 
 
 
-    
+
     -- do
     -- move <- getLine
     -- let realmove = stringToMove move
@@ -57,22 +59,20 @@ worker b input = if isValidMove b move then return move
     -- >> getMove board
 
 
--- getMove' board = do
-    -- move <- getLine
-    -- getMovevalid move board
- 
 -- Q#05
 
--- play :: Board -> Player -> IO ()
--- play board player = do
---     when _DISPLAY_LOGO_  printLogo
---     printBoard board
---     putStrLn.promptPlayer $ player
---     move <- getMove board
---     let (gamestate, newboard) = playMove player board move 
---     if gamestate == In_progress 
---         then play newboard (switchPlayer  player)
---         else do printBoard newboard >>  putStrLn(showGameState gamestate)
+play :: Board -> Player -> IO ()
+play board player =
+    when _DISPLAY_LOGO_  printLogo >>
+    printBoard board >>
+    putStrLn(promptPlayer player) >>
+    getMove board >>= worker
+    where
+        worker :: Move -> IO ()
+        worker  m = case playMove player board m of
+            (In_progress, newboard) -> play newboard (switchPlayer  player)
+            (gamestate, newboard)          -> printBoard newboard >>  putStrLn(showGameState gamestate)
+
 -- *** Assignment 5-2 *** --
 
 -- Q#07
@@ -80,7 +80,7 @@ worker b input = if isValidMove b move then return move
 printLogoDo :: IO ()
 printLogoDo = do
     logo <- readFile _LOGO_PATH_
-    putStrLn logo  
+    putStrLn logo
 -- Q#08
 
 firstPlayerDo :: IO Bool -> IO Player
@@ -107,8 +107,8 @@ playDo board player = do
     printBoard board
     putStrLn.promptPlayer $ player
     move <- getMove board
-    let (gamestate, newboard) = playMove player board move 
-    if gamestate == In_progress 
-        then play newboard (switchPlayer  player)
+    let (gamestate, newboard) = playMove player board move
+    if gamestate == In_progress
+        then playDo newboard (switchPlayer  player)
         else do printBoard newboard >>  putStrLn(showGameState gamestate)
 -- *** Assignment 5-2 *** --
