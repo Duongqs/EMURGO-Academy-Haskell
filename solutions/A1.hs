@@ -34,7 +34,7 @@ data Square = X | O | E
 
 
 -- Q#07
-data GameState = X_won | O_won | Tie | In_progress
+data GameState = X_won | O_won | Tie | In_progress | Playing
         deriving (Show, Eq)
 
 

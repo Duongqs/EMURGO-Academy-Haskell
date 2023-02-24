@@ -37,7 +37,7 @@ data Game = Game {
 initialState :: StdGen -> Game
 initialState gen = Game {
     activePlayer = X
-  , status       = Playing
+  , status       = In_progress
   , board        = _EMPTY_BOARD_
   , generator    = gen
   }
@@ -57,7 +57,7 @@ playGame = do
              , generator    = gen'
              }
   -- play again if game isn't over (otherwise return ())
-  when (stat == Playing) playGame
+  when (stat == In_progress) playGame
 
 randomGame :: IO ()
 randomGame = do
